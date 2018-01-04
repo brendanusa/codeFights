@@ -7,7 +7,7 @@
 
 function addTwoHugeNumbers(a, b) {
 
-  let result = [];
+  const result = [];
   let remainder = 0;
 
   const addLeadingZeroes = (numStr) => {
@@ -33,8 +33,8 @@ function addTwoHugeNumbers(a, b) {
     }
   }
 
-  let aQueue = populateQueue(a, []);
-  let bQueue = populateQueue(b, []);
+  const aQueue = populateQueue(a, []);
+  const bQueue = populateQueue(b, []);
 
   const addVals = (aVal, bVal) => {
     let sum;
@@ -115,5 +115,37 @@ b = [9651, 8173, 5384, 7798, 8467, 2360, 3375, 9054, 1161, 9880, 1427, 6573, 590
 
 // a = [1]
 // b = [9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999]
+
+const createList = (arr) => {
+
+  function ListNode(x) {
+    this.value = x;
+    this.next = null;
+  }
+
+  var list = new ListNode(arr.shift());
+
+  placeNode = (newNode, destinationNode) => {
+    if (destinationNode.next === null) {
+      destinationNode.next = newNode;
+    } else {
+      placeNode(newNode, destinationNode.next);
+    }
+  }
+
+  createNode = () => {
+    if (arr.length) {
+      node = new ListNode(arr.shift());
+      placeNode(node, list);
+      createNode();
+    }
+    return;
+  }
+
+  createNode();
+
+  return list;
+
+}
 
 console.log(addTwoHugeNumbers(createList(a), createList(b)))
