@@ -1,26 +1,16 @@
 function containsCloseNums(nums, k) {
-  const numsObj = {};
-  let result = false;
+  const numsIndices = {};
 
-  nums.forEach((num, i) => {
-
-    if (numsObj[num] !== undefined) {
-      numsObj[num].old = numsObj[num].new;
-      numsObj[num].new = i;
-    } else {
-      numsObj[num] = {old: 0, new: i}
+  for (let i = 0; i < nums.length; i++) {
+    if (i - numsIndices[nums[i]] <= k) {
+      return true;
     }
-
-    if (numsObj[num].new - numsObj[num].old <= k) {
-      result = true;
-    }
-
-  });
-
-  return result;
+    numsIndices[nums[i]] = i;
+  }
+  return false;
 }
 
-nums = [1, 0, 1, 1]
-k = 1
+nums = [0, 1, 2, 3, 5, 2]
+k = 2
 
 console.log(containsCloseNums(nums, k));
