@@ -11,7 +11,7 @@ function possibleSums(coins, quantity) {
       existingSums.forEach(sum => {
         sums[coins[i] * j + sum] = null;
       })
-      // add value to obj afterwards to avoid adding to itself
+      // then add value to obj (to avoid adding val to itself)
       sums[coins[i] * j] = null;
       j++;
     }
