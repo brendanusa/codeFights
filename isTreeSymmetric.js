@@ -5,49 +5,82 @@
 //   this.left = null;
 //   this.right = null;
 // }
+
 function isTreeSymmetric(t) {
-    
-    if (!t) {
-        return true;
-    }
-    
-    if (!t.left && !t.right) {
-        return true;
-    }
-    
-    if (t.left && !t.right || !t.left && t.right) {
-        console.log('19')
-        return false;
-    }
-    
-    if (t.left.value !== t.right.value) {
-        return false;
-    }
-    
+
     let result = true;
-    
-    const checkPath = (node1, node2) => {
-        if (!node1.left && !node1.right && !node2.left && !node2.right) {
-            return;
-        }
-        if (!node1.left || !node1.right || !node2.left || !node2.right) {
-            result = false;
-            return;
-        }
-        if (node1.left.value !== node2.right.value) {
-            result = false;
-            return;
-        }
-        if (node1.right.value !== node2.left.value) {
-            result = false;
-            return;
-        }
-        checkPath(node1.left, node2.right);
-        checkPath(node1.right, node2.left);
+
+    if (!t) return true;
+
+    if (t.left && t.right && t.left.value !== t.right.value) {
+        console.log('16')
+        return result = false;
     }
     
-    checkPath(t.left, t.right);
+    const checkMiniTree = (node) => {
+
+        if (node.left && node.right) {
+            if (node.left.left && node.left.right && node.right.left && node.right.right) {
+                console.log('18')
+                if (node.left.left.value === node.right.right.value && node.left.right.value === node.right.left.value) {
+                    console.log('20')
+                    checkMiniTree(node.left);
+                    checkMiniTree(node.right);
+                } else {
+                    console.log('24')
+                    return result = false;
+                }
+            } else if (!node.left.left && !node.left.right && !node.right.left && !node.right.right) {
+                console.log('28')
+                return;
+            } else {
+                console.log('31')
+                return result = false;
+            }
+        } else if (!node.left && !node.right) {
+            console.log('35')
+            return;
+        } else {
+            console.log('38')
+            return result = false;
+        }
+
+    }
+
+    checkMiniTree(t);
     
     return result;
     
 }
+
+t = {
+    "value": 1,
+    "left": {
+        "value": 2,
+        "left": {
+            "value": 3,
+            "left": null,
+            "right": null
+        },
+        "right": {
+            "value": 4,
+            "left": null,
+            "right": null
+        }
+    },
+    "right": {
+        "value": 2,
+        "left": {
+            "value": 4,
+            "left": null,
+            "right": null
+        },
+        "right": {
+            "value": 3,
+            "left": null,
+            "right": null
+        }
+    }
+}
+
+console.log(isTreeSymmetric(t))
