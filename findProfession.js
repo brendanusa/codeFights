@@ -1,31 +1,25 @@
 function findProfession(level, pos) {
 
-    let positionsTotal = 1;
+    // keep track of which child relative to parent
+    // if even, child has same profession as parent
+    let toggle = 2;
 
-    let i = 1;
-
-    // calculate total number of vals in given level
-    while (i < level) {
-      positionsTotal *= 2;
-      i++;
+    // iterate through parents
+    while (level > 2) {
+      pos % 2 === 0 ? toggle++ : null;
+      pos = Math.floor((pos + 1) / 2);
+      level--;
     }
-
-    console.log(positionsTotal)
-
-    // vals for level = 2
-    let levelVals = 'ED';
-
-    // build string for given level
-    let origLength = 2;
-    while (levelVals.length < positionsTotal) {
-      origLength = levelVals.length;
-      for (i = origLength - 1; i >= 0; i--) {
-        levelVals += levelVals[i];
-      }
-
+    
+    // check pos and toggle at level 2 for possible doctor
+    if (pos === 1 && toggle % 2 === 1) {
+      return 'Doctor';
+    } else if (pos === 2 && toggle % 2 === 0) {
+      return 'Doctor';
+    } else {
+      // else return engineer
+      return 'Engineer';
     }
-
-    return levelVals[pos];
     
 }
 
