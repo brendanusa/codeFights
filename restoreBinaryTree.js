@@ -2,19 +2,11 @@ function restoreBinaryTree(inorder, preorder) {
 
 //   each value represents its own tree
 //   find vertex, left side, and right side for each value/tree
-//   continue until no more values
-//   
-//   iterating through preorder, everything to the left side of that value in inorder is the left side of the value's tree (leftSide), everything to the right is rightSide
-//
-
-function restoreBinaryTree(inorder, preorder) {
-
-//   each value represents its own tree
-//   find vertex, left side, and right side for each value/tree
 //   
 //   iterating through preorder, everything to the left side of that value in inorder is the left side of the value's tree (leftSide), everything to the right is rightSide
 //
 //   the inorder being passed to Tree is the segment of inorder that belongs to that subtree
+
   function Tree(inorder) {
     this.value = preorder[0];
     this.left = null;
@@ -43,12 +35,10 @@ function restoreBinaryTree(inorder, preorder) {
     if (rightSide.length > 0) {
       this.right = new Tree(rightSide);
     }
-
   }
+
   return new Tree(inorder, preorder);
 }
 
 inorder = [4, 2, 1, 5, 3, 6]
 preorder = [1, 2, 4, 3, 5, 6]
-
-console.log(restoreBinaryTree(inorder, preorder))
