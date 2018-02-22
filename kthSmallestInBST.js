@@ -20,6 +20,6 @@ function kthSmallestInBST(t, k) {
 
   storeValue(t);
 
-  return values.sort((a, b) => a > b ? 1 : -1)[k - 1];
+  return values.sort((a, b) => a - b)[k - 1];
 
 }
