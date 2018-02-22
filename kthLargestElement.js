@@ -34,7 +34,7 @@ function kthLargestElement(nums, k) {
 
     let rowFirstIndex = 1;
 
-    while (rowFirstIndex < k - 1) {
+    while (rowFirstIndex < (k + 1) / 2) {
       rowFirstIndex *= 2;
     }
 
@@ -45,7 +45,10 @@ function kthLargestElement(nums, k) {
     
 }
 
-// nums = [3, 2, 1, 5, 6, 4]
-// k = 2
+nums = [7, 6, 5, 4, 3, 2, 1]
+k = 2
 
-// console.log(kthLargestElement(nums, k))
+nums = [-1, 2, 0]
+k = 3
+
+console.log(kthLargestElement(nums, k))
