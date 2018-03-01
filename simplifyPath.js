@@ -9,50 +9,55 @@ function simplifyPath(path) {
     path += '/';
   }
 
-  while (i >= 0) {
-    console.log(path[i])
+  const checkCharacter = () => {
 
-    if (path[i] === '/' && path[i - 1] && path[i - 1] === '/') {
-      console.log('10', i, path[i])
-      i--;
+    if (i < 0) {
+      return;
     }
 
     if (path[i] === '/' && path[i - 1] && path[i - 2] && path[i - 1] === '.' && path[i - 2] === '.') {
-      console.log('15', i, path[i])
       dir--;
       i -= 3;
-    } else {
-      while (dir < 0) {
-        console.log('27', i, path[i])
-        while (path[i] !== '/' && i >= 0) {
-          console.log('29', i, path[i])
-          i--;
-        }
-        console.log('32', i, path[i])
-        dir++;
-      }
+      return checkCharacter();
     }
 
+    if (path[i] === '/' && path[i - 1] && path[i - 1] === '/') {
+      i--;
+      return checkCharacter();
+    }
 
     if (path[i] === '/' && path[i - 1] && path[i - 1] === '.' && path[i - 2] === '/') {
-      console.log('22', i, path[i])
       i -= 2;
+      return checkCharacter();
     }
 
-    console.log('36', i, path[i])
+    if (dir < 0) {
+      while (path[i - 1] && path[i - 1] !== '/') {
+        i--;
+      }
+      dir++;
+      i--;
+      return checkCharacter();
+    }
+
     newPath += path[i];
     i--;
-
+    return checkCharacter();
+    
   }
 
-  console.log(newPath)
+  checkCharacter();
 
   newPath = newPath.slice(1, newPath.length).split('').reverse().join('');
 
-  return newPath
+  if (!newPath[0] || newPath[0] !== '/') {
+    return '/' + newPath;
+  }
+
+  return newPath;
 
 }
 
-path = "/a/b/c/../.."
+// path = "/a/b/c/../.."
 
-console.log(simplifyPath(path))
+// console.log(simplifyPath(path))
